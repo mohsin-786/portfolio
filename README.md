@@ -1,5 +1,5 @@
 
-# Portfolio (Under Progress)
+# :page_with_curl:  Portfolio (Under Progress)
 
 This repository contains my Portfolio. 
 
@@ -10,7 +10,7 @@ This repository contains my Portfolio.
 
 
 
-## Deployment
+## :cloud: Deployment
 
 1. To deploy this project run:
 
@@ -23,7 +23,8 @@ And
   node app.js  
 ```
 
-Secondly,
+
+2.Secondly,
 It has a Docker Compose and Jenkinsfile for Deployment automation.
 
 
