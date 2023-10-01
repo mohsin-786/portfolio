@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    
+    environment {
+        IMAGE_TAG="${BUILD_NUMBER}"
+    }
+    
     stages {
         stage("Clone"){
             steps{
@@ -8,7 +13,7 @@ pipeline {
         }
         stage("Build"){
             steps{
-                sh 'docker build . -t mohsin01/portfolio:latest'
+                sh 'docker build . -t mohsin01/portfolio:${BUILD_NUMBER}'
             }
         }
         stage("Login and push"){
@@ -16,7 +21,7 @@ pipeline {
                 echo "Logging in and pushing to Dockerhub"
                 withCredentials([usernamePassword(credentialsId:'dockerhub', usernameVariable:'USERNAME', passwordVariable:'PASSWORD')]) {
                     sh 'docker login -u $USERNAME -p $PASSWORD'  
-                    sh 'docker push mohsin01/portfolio:latest'
+                    sh 'docker push mohsin01/portfolio:${BUILD_NUMBER}'
                 }
             }
         }
