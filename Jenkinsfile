@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Build"){
             steps{
-                sh 'docker build . -t mohsin01/portfolio:${BUILD_NUMBER}'
+                sh 'docker build . -t mohsin01/portfolio:${IMAGE_TAG}'
             }
         }
         stage("Login and push"){
@@ -21,11 +21,11 @@ pipeline {
                 echo "Logging in and pushing to Dockerhub"
                 //withCredentials([usernamePassword(credentialsId:'dockerhub', usernameVariable:'USERNAME', passwordVariable:'PASSWORD')]) {
                   //  sh 'docker login -u $USERNAME -p $PASSWORD'  
-                    sh 'docker push mohsin01/portfolio:${BUILD_NUMBER}'
+                    sh 'docker push mohsin01/portfolio:${IMAGE_TAG}'
                // }
                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh 'docker login -u $USER -p $PASS'  
-                    sh 'docker push mohsin01/portfolio:${BUILD_NUMBER}'
+                    sh 'docker push mohsin01/portfolio:${IMAGE_TAG}'
             }
             }
         }
